@@ -1,4 +1,4 @@
-package com.examples.androidpractice5;
+package com.examples.minimal_to_do;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

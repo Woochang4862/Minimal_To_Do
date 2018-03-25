@@ -1,11 +1,12 @@
-package com.examples.androidpractice5;
+package com.examples.minimal_to_do;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,35 +20,31 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        setTitle("나의 일정");
+        setTitle("");
 
         init();
     }
 
-    void init(){
+    void init() {
         etTitle = (EditText) findViewById(R.id.etTitle);
         //content=getIntent().getParcelableExtra("Content");
         //item=content.getTitle();
         //etTitle.setText(item);
     }
 
-    public void onClick(View v){
-        if(v.getId() == R.id.btnCancel){
-            finish();
-        }else if(v.getId() == R.id.btnAdd){
-            Intent intent = new Intent();
+    public void onClick(View v) {
+        Intent intent = new Intent();
 
-            String title =etTitle.getText().toString();
+        String title = etTitle.getText().toString();
 
-            Content temp = new Content(title);
+        Content temp = new Content(title);
 
-            intent.putExtra("Content", temp);
-            setResult(RESULT_OK, intent);
-            finish();
-
-        }
+        intent.putExtra("Content", temp);
+        setResult(RESULT_OK, intent);
+        finish();
     }
-    String getTime(){
+
+    String getTime() {
         String time;
 
         long now = System.currentTimeMillis();
@@ -60,5 +57,19 @@ public class Main2Activity extends AppCompatActivity {
 
 
         return time;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.input_menu, menu);
+
+
+        return true;
     }
 }

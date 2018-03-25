@@ -1,13 +1,15 @@
-package com.examples.androidpractice5;
+package com.examples.minimal_to_do;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
 
-    TextView tv;
+    TextView empty_t;
+    ImageView empty_i;
 
     int Addition = 1;
 
@@ -29,15 +32,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("나의 일정");
+        setTitle("Minimal");
 
         init();
+
+        listview.setEmptyView(empty_t);
+        listview.setEmptyView(empty_i);
     }
 
 
     void init(){
         listview = (ListView)findViewById(R.id.listview);
-        tv = (TextView)findViewById(R.id.tv);
+        empty_t=(TextView)findViewById(R.id.empty_t);
+        empty_i=(ImageView) findViewById(R.id.empty_i);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, title);
 
@@ -62,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                                 title.remove(position);
                                 storage.remove(position);
                                 adapter.notifyDataSetChanged();
-                                tv.setText("일정 리스트("+title.size()+"개)");
                             }
                         }).show();
                 return true;
@@ -95,8 +101,13 @@ public class MainActivity extends AppCompatActivity {
                 title.add(r.getTitle());
                 storage.add(r);
                 adapter.notifyDataSetChanged();
-                tv.setText("일정 리스트("+title.size()+"개)");
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 }

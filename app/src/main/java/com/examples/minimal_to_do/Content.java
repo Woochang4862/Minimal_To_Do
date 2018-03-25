@@ -1,4 +1,4 @@
-package com.examples.androidpractice5;
+package com.examples.minimal_to_do;
 
 import android.os.Parcel;
 import android.os.Parcelable;
